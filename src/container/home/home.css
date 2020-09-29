@@ -1,0 +1,8 @@
+.home-container{
+    margin: 10px 20%;
+}
+
+.home-container .button-check p{
+    display: inline-block;
+    margin: 0 5px;
+}
