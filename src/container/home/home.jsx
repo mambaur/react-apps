@@ -1,26 +1,13 @@
-import React, {Component} from 'react';
-import Card from '../../component/card/card';
-// import 'bootstrap/dist/css/bootstrap.css';
-import './home.css';
+import React, {Component, Fragment} from 'react';
+import CardWidget from '../../component/card/card';
+import NavbarClass from '../../component/navbar/navbar';
+import { Container, Row } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Home extends Component{
     state = {
-        value: 1,
-        name: 'klik cek nama'
-    }
-
-    handlePlus = ()=>{
-        this.setState({
-            value: this.state.value + 1
-        })
-    }
-    
-    handleMin = ()=>{
-        if(this.state.value > 0){
-            this.setState({
-                value: this.state.value - 1
-            })
-        }
+        name: 'klik cek nama',
+        post: []
     }
 
     handleCekNama = (newValue)=>{
@@ -29,21 +16,34 @@ class Home extends Component{
         })
     }
 
+    componentDidMount () {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => {
+                this.setState({
+                    post: json
+                })
+            })
+    }
+
     render(){
         return (
-            <div className="home-container">
-                <h1>Card View</h1>
-                <div className="button-check">
-                    <button className="btn btn-primary" onClick={this.handlePlus}>+ Tambah</button>
-                    <p>{this.state.value}</p>
-                    <button className="btn btn-primary" onClick={this.handleMin}>- Kurang</button>
-                    <p>Nama: {this.state.name}</p>
-                </div>
-                <Card name="Mambaur Roziq" nim="E41161383" onCekNama={()=>handleCekNama()}/>
-                <Card name="Ahira Labata" nim="E41161345"/>
-                <Card name="Rezhi Sylvia" nim="E4116199"/>
-                <Card />
-            </div>
+            <Fragment>
+                <NavbarClass/>
+                <Container className="my-4">
+                    <h1>React Training</h1>
+                    <Row>
+                        <p className="ml-3">Nama: {this.state.name}</p>
+                    </Row>
+                    <Row>
+                    {
+                        this.state.post.map(post => {
+                            return <CardWidget key={post.id} name={post.name} email={post.email} onCekNama={(value)=>this.handleCekNama(value)}/>
+                        })
+                    }
+                    </Row>
+                </Container>
+            </Fragment>
         )
     }
 }

@@ -1,28 +1,38 @@
-import React, {Component} from 'react';
-import './card.css';
+import React, {Component, Fragment} from 'react';
+import { Card, Button } from 'react-bootstrap';
 
-class Card extends Component{
+class CardWidget extends Component{
 
-    handleCekNama = ()=>{
-        this.props.onCekNama
+    handleCekNama = (newValue)=>{
+        this.props.onCekNama(newValue)
+    }
+
+    onChangeName = ()=>{
+        this.handleCekNama(this.props.name)
     }
 
     render(){
         return (
-            <div className="card">
-            <h3>{this.props.name}</h3>
-            <p>{this.props.nim}</p>
-            <p>{this.props.ttl}</p>
-            <button className="btn btn-primary">Cek nama</button>
-            </div>
+            <Fragment>
+                <Card className="m-1" style={{ width: '18rem' }}>
+                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+                    <Card.Body>
+                        <Card.Title>{this.props.name}</Card.Title>
+                        <Card.Text>
+                            {this.props.email} - {this.props.ttl}
+                        </Card.Text>
+                        <Button variant="primary" onClick={this.onChangeName}>Cek nama</Button>
+                    </Card.Body>
+                </Card>
+            </Fragment>
         )
     }
 }
 
-Card.defaultProps = {
+CardWidget.defaultProps = {
     name: 'No name',
-    nim: 'Nim is not available',
+    email: 'Email is not available',
     ttl: 'Null value'
 }
 
-export default Card;
+export default CardWidget;
