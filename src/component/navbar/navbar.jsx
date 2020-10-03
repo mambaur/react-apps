@@ -1,13 +1,21 @@
 import React, {Component, Fragment} from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 
-class NavbarClass extends Component {
+class NavbarWidget extends Component {
     render(){
         return (
             <Fragment>
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Container>
-                    <Navbar.Brand href="#home">Project Latihan</Navbar.Brand>
+                    <Navbar.Brand href="#home">
+                        <img
+                            src="https://react-bootstrap.netlify.app/logo.svg"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="React Bootstrap logo"/>{' '}
+                        React Practice
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
@@ -34,4 +42,4 @@ class NavbarClass extends Component {
     }
 }
 
-export default NavbarClass;
+export default NavbarWidget;
