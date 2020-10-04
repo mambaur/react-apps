@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 class NavbarWidget extends Component {
     render(){
@@ -7,7 +8,7 @@ class NavbarWidget extends Component {
             <Fragment>
                 <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Container>
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                         <img
                             src="https://react-bootstrap.netlify.app/logo.svg"
                             width="30"
@@ -22,9 +23,11 @@ class NavbarWidget extends Component {
                             {/* Dummy */}
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#deets">Home</Nav.Link>
-                            <Nav.Link href="#memes">
-                                List
+                            <Nav.Link> 
+                                <Link to="/">Home</Link>
+                            </Nav.Link>
+                            <Nav.Link>
+                                <Link to="/crud">Crud</Link>
                             </Nav.Link>
                             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Home from './container/home/home';
+import RouteWidget from './container/routes/route';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <RouteWidget />
   </React.StrictMode>,
   document.getElementById('root')
 );
