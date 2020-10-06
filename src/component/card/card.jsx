@@ -12,7 +12,8 @@ class CardWidget extends Component{
                         <Card.Text>
                             {this.props.data.body}
                         </Card.Text>
-                        <Button variant="primary" onClick={()=>{this.props.onDeleteClick(this.props.data.id)}}>Delete</Button>
+                        <Button variant="primary" onClick={()=>{this.props.onUpdateClick(this.props.data)}}>Update</Button>
+                        <Button variant="danger" className="ml-1" onClick={()=>{this.props.onDeleteClick(this.props.data.id)}}>Delete</Button>
                     </Card.Body>
                 </Card>
             </Fragment>

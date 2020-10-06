@@ -19,7 +19,8 @@ class Crud extends Component{
             id: 1,
             title: '',
             body: '',
-        }
+        },
+        isUpdate: false
     }
 
     getPostAPI = ()=>{
@@ -47,16 +48,35 @@ class Crud extends Component{
             })
     }
 
+    handleUpdate = (data)=>{
+        console.log(data);
+        this.setState({
+            content: 'updateData',
+            postKey: data,
+            isUpdate: true
+        })
+    }
+
     handleMenuClick = (value)=>{
         this.setState({
-            content: value
+            content: value,
+            postKey: {
+                userId: 1,
+                id: 1,
+                title: '',
+                body: '',
+            }
         }, ()=>{
             this.getPostAPI()
         })
     }
 
     handleSubmit = ()=>{
-        this.postDataToAPI();
+        if(this.state.isUpdate){
+git 
+        }else{
+            this.postDataToAPI();
+        }
     }
 
     handleFormChange = (event)=>{
@@ -84,8 +104,8 @@ class Crud extends Component{
                             <h1>Get Data Fake API</h1>
                         ): this.state.content === 'addData' ? (
                             <h1>Post Data Fake API</h1>
-                        ): this.state.content === 'editData' ? (
-                            <h1>Put Data Fake API</h1>
+                        ): this.state.content === 'updateData' ? (
+                            <h1>Update Data Fake API</h1>
                         ):(null)
                     }
                     
@@ -95,21 +115,26 @@ class Crud extends Component{
                         {
                             this.state.content === 'getAll' ? (
                                 this.state.post.map(post => {
-                                    return <CardWidget key={post.id} data={post} onDeleteClick={this.handleDelete}/>
+                                    return <CardWidget key={post.id} data={post} onDeleteClick={this.handleDelete} onUpdateClick={this.handleUpdate}/>
                                 })
-                            ):this.state.content === 'addData' ?(
+                            ):this.state.content === 'addData' || this.state.content === 'updateData' ?(
                                 <Card className="p-3">
                                     <Form.Group controlId="exampleForm.ControlInput1">
                                         <Form.Label>Title</Form.Label>
-                                        <Form.Control type="text" name="title" placeholder="Input title..." onChange={this.handleFormChange}/>
+                                        <Form.Control type="text" value={this.state.postKey.title} name="title" placeholder="Input title..." onChange={this.handleFormChange}/>
                                     </Form.Group>
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
                                         <Form.Label>Article content</Form.Label>
-                                        <Form.Control as="textarea" name="body" rows="3" onChange={this.handleFormChange}/>
+                                        <Form.Control as="textarea" value={this.state.postKey.body} name="body" rows="3" onChange={this.handleFormChange}/>
                                     </Form.Group>
-                                    <Button variant="primary" onClick={this.handleSubmit} type="submit">
+                                    {
+                                        this.state.content === 'addData' ? (<Button variant="success" onClick={this.handleSubmit} type="submit">
                                         Tambah
-                                    </Button>
+                                    </Button>):(<Button variant="primary" onClick={this.handleSubmit} type="submit">
+                                        Update
+                                    </Button>)
+                                    }
+                                    
                                 </Card>
                             ):(null)
                         }
