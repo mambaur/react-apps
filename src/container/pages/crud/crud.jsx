@@ -35,21 +35,46 @@ class Crud extends Component{
     postDataToAPI = ()=>{
         axios.post('http://localhost:3004/posts', this.state.postKey)
             .then((res)=>{
+                console.log(res)
                 alert('Insert data success!')
+                this.setState({
+                    content: 'getAll',
+                }, ()=>{
+                    this.getPostAPI()
+                })
             }, (err)=>{
                 console.log(err)
+            })
+    }
+
+    putDataToAPI = ()=>{
+        axios.put(`http://localhost:3004/posts/${this.state.postKey.id}`, this.state.postKey)
+            .then((res)=>{
+                console.log(res)
+                alert('Update data success!')
+                this.setState({
+                    content: 'getAll',
+                    postKey: {
+                        userId: 1,
+                        id: 1,
+                        title: '',
+                        body: '',
+                    },
+                }, ()=>{
+                    this.getPostAPI()
+                })
             })
     }
 
     handleDelete = (id)=>{
         axios.delete(`http://localhost:3004/posts/${id}`)
             .then((res)=>{
+                console.log(res)
                 this.getPostAPI()
             })
     }
 
     handleUpdate = (data)=>{
-        console.log(data);
         this.setState({
             content: 'updateData',
             postKey: data,
@@ -65,7 +90,8 @@ class Crud extends Component{
                 id: 1,
                 title: '',
                 body: '',
-            }
+            },
+            isUpdate: value !== "updateData" ? false : true
         }, ()=>{
             this.getPostAPI()
         })
@@ -73,7 +99,7 @@ class Crud extends Component{
 
     handleSubmit = ()=>{
         if(this.state.isUpdate){
-git 
+            this.putDataToAPI();
         }else{
             this.postDataToAPI();
         }
@@ -82,7 +108,9 @@ git
     handleFormChange = (event)=>{
         let postKeyNew = {...this.state.postKey};
         let timestamp = new Date().getTime();
-        postKeyNew['id'] = timestamp;
+        if (!this.state.isUpdate) {
+            postKeyNew['id'] = timestamp;
+        }
         postKeyNew[event.target.name] = event.target.value;
         this.setState({
             postKey: postKeyNew

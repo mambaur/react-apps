@@ -7,10 +7,6 @@ import Home from '../pages/home/home';
 // npx json-server --watch db.json --port 3004
 
 class RouteWidget extends Component{
-    // state = {
-    //     post: [],
-    // }
-
     render(){
         return (
             <Router>

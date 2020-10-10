@@ -12,9 +12,6 @@ class SidebarWidget extends Component {
                     <ListGroup.Item onClick={()=>this.props.onMenuClick('addData')} action variant="light">
                         Tambah data
                     </ListGroup.Item>
-                    <ListGroup.Item onClick={()=>this.props.onMenuClick('updateData')} action variant="light">
-                        Ubah data
-                    </ListGroup.Item>
                 </ListGroup>
             </Fragment>
         )
